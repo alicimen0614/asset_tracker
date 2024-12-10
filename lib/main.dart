@@ -12,9 +12,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'AssetTracker',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        useMaterial3: true,
-      ),
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)),
       routerDelegate: router.delegate(),
       routeInformationParser: router.defaultRouteParser(),
     );
