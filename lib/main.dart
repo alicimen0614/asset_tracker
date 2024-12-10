@@ -14,6 +14,9 @@ class MyApp extends StatelessWidget {
       title: 'AssetTracker',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Color(0xFFF4CE14),
+          ),
           useMaterial3: true,
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)),
       routerDelegate: router.delegate(),
