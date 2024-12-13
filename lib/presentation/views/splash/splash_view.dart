@@ -1,3 +1,4 @@
+import 'package:asset_tracker/core/constants/const_image_paths.dart';
 import 'package:asset_tracker/core/router/app_router.dart';
 import 'package:asset_tracker/core/router/app_router.gr.dart';
 import 'package:asset_tracker/core/utils/extensions/device_size_extension.dart';
@@ -14,11 +15,12 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
-  final String imagePath = "assets/images/assets_logo.png";
+  final int _splashWaitingValue = 3;
+  final String imagePath = ConstImagePaths.logoPath;
 
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(Duration(seconds: _splashWaitingValue), () {
       router.replace(const LoginRoute());
     });
     super.initState();

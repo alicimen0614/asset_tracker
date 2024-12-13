@@ -1,23 +1,24 @@
+import 'package:asset_tracker/core/constants/const_app_texts.dart';
+import 'package:asset_tracker/core/utils/mixins/regexp_mixins.dart';
+
 final class LoginValidator {
   String? validateEmail(String? value) {
-    RegExp regExp = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+    RegExp regExp = RegExp(RegexpMixins.emailRegexp);
 
     if (value == null || value.isEmpty) {
-      return 'E-posta boş olamaz';
+      return ConstAppTexts.emailCantBeEmptyText;
     } else if (!regExp.hasMatch(value)) {
-      return 'Geçersiz e-posta adresi';
+      return ConstAppTexts.invalidEmailAddressText;
     }
     return null;
   }
 
   String? validatePassword(String? value) {
-    String pattern = r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$';
-    RegExp regExp = RegExp(pattern);
-
+    RegExp regExp = RegExp(RegexpMixins.passwordRegexp);
     if (value == null || value.isEmpty) {
-      return 'Şifre boş olamaz';
+      return ConstAppTexts.passwordCantBeEmptyText;
     } else if (!regExp.hasMatch(value)) {
-      return 'Şifre en az 6 karakter olmalı ve en az bir harf ve bir rakam içermeli';
+      return ConstAppTexts.passwordLengthAlertText;
     }
     return null;
   }

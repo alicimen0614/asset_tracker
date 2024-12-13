@@ -1,4 +1,6 @@
+import 'package:asset_tracker/core/constants/const_app_texts.dart';
 import 'package:asset_tracker/core/router/app_router.dart';
+import 'package:asset_tracker/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,14 +13,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'AssetTracker',
+      title: ConstAppTexts.appTitleText,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          appBarTheme: const AppBarTheme(
-            backgroundColor: Color(0xFFF4CE14),
-          ),
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)),
+      theme: AppTheme.appTheme,
       routerDelegate: router.delegate(),
       routeInformationParser: router.defaultRouteParser(),
     );
