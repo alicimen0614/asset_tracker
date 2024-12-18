@@ -1,4 +1,4 @@
-package com.example.asset_tracker
+package com.assettracker.app
 
 import io.flutter.embedding.android.FlutterActivity
 

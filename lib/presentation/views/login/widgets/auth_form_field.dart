@@ -7,6 +7,7 @@ class AuthFormField extends StatelessWidget {
   final TextInputType textInputType;
   final TextEditingController textEditingController;
   final bool isObscure;
+  final bool isActive;
   const AuthFormField(
       {super.key,
       required this.hint,
@@ -14,7 +15,8 @@ class AuthFormField extends StatelessWidget {
       required this.textInputType,
       required this.textEditingController,
       this.isObscure = false,
-      required this.validator});
+      required this.validator,
+      this.isActive = true});
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,7 @@ class AuthFormField extends StatelessWidget {
       keyboardType: textInputType,
       obscureText: isObscure,
       validator: validator,
+      enabled: isActive,
       decoration: InputDecoration(
           label: Text(label),
           hintText: hint,
