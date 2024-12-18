@@ -1,6 +1,11 @@
 import 'package:asset_tracker/core/constants/const_app_texts.dart';
+import 'package:asset_tracker/core/router/app_router.dart';
+import 'package:asset_tracker/core/router/app_router.gr.dart';
 import 'package:asset_tracker/core/sizes/app_edge_insets.dart';
 import 'package:asset_tracker/core/sizes/app_size.dart';
+import 'package:asset_tracker/core/state/auth_notifier.dart';
+import 'package:asset_tracker/core/utils/enums/auth_error_enum.dart';
+import 'package:asset_tracker/core/utils/helpers/snackbar_helper.dart';
 import 'package:asset_tracker/core/utils/validators/login_validator.dart';
 import 'package:asset_tracker/core/utils/widgets/app_logo_widget.dart';
 import 'package:asset_tracker/core/utils/widgets/custom_elevated_button.dart';
@@ -8,16 +13,17 @@ import 'package:asset_tracker/core/utils/widgets/custom_sized_box.dart';
 import 'package:asset_tracker/presentation/views/login/widgets/auth_form_field.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 @RoutePage()
-class LoginView extends StatefulWidget {
+class LoginView extends ConsumerStatefulWidget {
   const LoginView({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  ConsumerState<LoginView> createState() => _LoginViewState();
 }
 
-mixin _LoginStateHelperMixin on State<LoginView> {
+mixin _LoginStateHelperMixin on ConsumerState<LoginView> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -31,9 +37,11 @@ mixin _LoginStateHelperMixin on State<LoginView> {
   }
 }
 
-class _LoginViewState extends State<LoginView> with _LoginStateHelperMixin {
+class _LoginViewState extends ConsumerState<LoginView>
+    with _LoginStateHelperMixin {
   @override
   Widget build(BuildContext context) {
+    final authState = ref.watch(authNotifierProvider);
     return Scaffold(
         appBar: AppBar(
           title: const Text(
@@ -57,6 +65,7 @@ class _LoginViewState extends State<LoginView> with _LoginStateHelperMixin {
                     textEditingController: _emailController,
                     validator: (value) => _loginValidator.validateEmail(value),
                     isObscure: false,
+                    isActive: !authState.isLoading,
                   ),
                   const CustomSizedBox.xlargeHeigth(),
                   AuthFormField(
@@ -67,9 +76,13 @@ class _LoginViewState extends State<LoginView> with _LoginStateHelperMixin {
                     label: ConstAppTexts.passwordText,
                     hint: ConstAppTexts.enterPasswordText,
                     isObscure: true,
+                    isActive: !authState.isLoading,
                   ),
                   const CustomSizedBox.x2largeHeigth(),
-                  _signInButtonBuilder()
+                  authState.isLoading == false
+                      ? _signInButtonBuilder()
+                      : const SizedBox(
+                          child: Center(child: CircularProgressIndicator()))
                 ],
               )),
         ));
@@ -88,9 +101,22 @@ class _LoginViewState extends State<LoginView> with _LoginStateHelperMixin {
     );
   }
 
-  void _onLogin() {
+  Future<void> _onLogin() async {
     if (_formKey.currentState?.validate() != false) {
       _formKey.currentState?.save();
+
+      bool isSignedIn = await ref.read(authNotifierProvider.notifier).signIn(
+          email: _emailController.text, password: _passwordController.text);
+
+      if (isSignedIn) {
+        SnackbarHelper.showSnackbar(context, ConstAppTexts.signInSuccessText);
+        router.replace(const HomeRoute());
+      } else {
+        AuthError? error = ref.read(authNotifierProvider).error;
+        if (error != null) {
+          SnackbarHelper.showSnackbar(context, error.message);
+        }
+      }
     }
   }
 }
