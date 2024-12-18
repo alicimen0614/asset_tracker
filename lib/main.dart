@@ -1,9 +1,12 @@
 import 'package:asset_tracker/core/constants/const_app_texts.dart';
 import 'package:asset_tracker/core/router/app_router.dart';
 import 'package:asset_tracker/core/theme/app_theme.dart';
+import 'package:asset_tracker/firebase_options.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
