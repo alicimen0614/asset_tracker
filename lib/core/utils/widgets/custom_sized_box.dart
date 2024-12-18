@@ -7,6 +7,7 @@ class CustomSizedBox extends SizedBox {
   const CustomSizedBox.empty({super.key}) : super();
 
   // for heigth
+
   ///4.0
   const CustomSizedBox.xSmallHeigth({super.key})
       : super(height: AppSize.xSmallSize);
@@ -44,6 +45,7 @@ class CustomSizedBox extends SizedBox {
       : super(height: AppSize.x5LargeSize);
 
   // for width
+
   ///4.0
   const CustomSizedBox.xSmallWidth({super.key})
       : super(width: AppSize.xSmallSize);

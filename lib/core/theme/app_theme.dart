@@ -1,3 +1,4 @@
+import 'package:asset_tracker/core/constants/const_app_colors.dart';
 import 'package:asset_tracker/core/sizes/app_size.dart';
 import 'package:flutter/material.dart';
 
@@ -5,13 +6,13 @@ class AppTheme {
   static final appTheme = ThemeData(
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF45474B),
+          backgroundColor: ConstAppColors.blackElevatedButtonColor,
           foregroundColor: Colors.white),
     ),
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(seedColor: Colors.tealAccent),
     appBarTheme: const AppBarTheme(
-      backgroundColor: Color(0xFFF4CE14),
+      backgroundColor: ConstAppColors.yellowAppBarColor,
     ),
     inputDecorationTheme: const InputDecorationTheme(
       hintStyle: TextStyle(

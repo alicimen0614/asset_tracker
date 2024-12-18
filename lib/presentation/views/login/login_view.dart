@@ -1,7 +1,6 @@
 import 'package:asset_tracker/core/constants/const_app_texts.dart';
 import 'package:asset_tracker/core/sizes/app_edge_insets.dart';
 import 'package:asset_tracker/core/sizes/app_size.dart';
-import 'package:asset_tracker/core/utils/extensions/device_size_extension.dart';
 import 'package:asset_tracker/core/utils/validators/login_validator.dart';
 import 'package:asset_tracker/core/utils/widgets/app_logo_widget.dart';
 import 'package:asset_tracker/core/utils/widgets/custom_elevated_button.dart';

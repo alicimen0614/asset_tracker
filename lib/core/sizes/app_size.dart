@@ -18,14 +18,14 @@ final class AppSize {
   ///8.0
   static const double smallPadding = 8.0;
 
-  ///12.0
-  static const double mediumPadding = 12.0;
-
   ///16.0
-  static const double largePadding = 16.0;
+  static const double mediumPadding = 16.0;
 
   ///24.0
-  static const double xLargePadding = 20.0;
+  static const double largePadding = 24.0;
+
+  ///32.0
+  static const double xLargePadding = 32.0;
 
   // Radius //
 
