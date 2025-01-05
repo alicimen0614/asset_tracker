@@ -23,6 +23,8 @@ class ConstAppTexts {
       'E-posta ile hesap oluşturma özelliği devre dışı bırakılmış.';
   static const weakPasswordText =
       "Girdiğiniz şifre çok zayıf. Daha güçlü bir şifre deneyin.";
+  static const invalidCredentialText =
+      "E-posta yada şifre hatalı. Lütfen tekrar deneyin.";
   static const signInSuccessText = "Giriş başarılı";
   static const homePageText = "Anasayfa";
 }
