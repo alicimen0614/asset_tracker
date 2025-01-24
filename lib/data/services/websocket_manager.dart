@@ -1,16 +1,18 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:asset_tracker/core/models/haremaltin_model.dart';
+import 'package:asset_tracker/data/models/socket_models/haremaltin_model.dart';
 import 'package:asset_tracker/core/services/websocket_service.dart';
 import 'package:asset_tracker/core/utils/enums/socket_message_type.dart';
 import 'package:web_socket/web_socket.dart';
+
+import '../models/socket_models/asset_model.dart';
 
 class WebSocketManager implements IWebSocketService {
   final String url;
   WebSocket? _webSocket;
   final StreamController<Map<String, dynamic>> _controller =
       StreamController<Map<String, dynamic>>.broadcast();
-  final Map<String, Item> _fixedDataList = {};
+  final List<Asset> _fixedDataList = [];
   final int maxRetries = 3;
   final int delayBetweenRetries = 2;
 
@@ -32,7 +34,7 @@ class WebSocketManager implements IWebSocketService {
   }
 
   void _listenToWebSocketEvents() {
-    _webSocket!.events.listen(
+    _webSocket?.events.listen(
       (event) async {
         switch (event) {
           case TextDataReceived():
@@ -45,7 +47,6 @@ class WebSocketManager implements IWebSocketService {
             }
             break;
           case BinaryDataReceived():
-            break;
           case CloseReceived():
             break;
         }
@@ -61,21 +62,21 @@ class WebSocketManager implements IWebSocketService {
     final decoded = json.decode(event.text.substring(2));
     // get the actual data from the second index of the decoded list
     final incomingData = HaremAltinData.fromJson(decoded[1]);
-    final dataList = incomingData.data.values.toList();
+    final dataList = incomingData.data;
 
     _updateFixedDataList(dataList);
-    _controller.add({
-      'date': incomingData.meta.tarih,
-      'itemList': _fixedDataList.values.toList(),
-    });
+    _controller
+        .add({'date': incomingData.meta?.tarih, 'itemList': _fixedDataList});
   }
 
-  void _updateFixedDataList(List<Item> incomingData) {
+  void _updateFixedDataList(List<Asset> incomingData) {
     for (var data in incomingData) {
-      if (_fixedDataList.containsKey(data.code)) {
-        _fixedDataList[data.code] = data;
+      int index =
+          _fixedDataList.indexWhere((element) => element.code == data.code);
+      if (index != -1) {
+        _fixedDataList[index] = data;
       } else {
-        _fixedDataList.addAll({data.code: data});
+        _fixedDataList.add(data);
       }
     }
   }

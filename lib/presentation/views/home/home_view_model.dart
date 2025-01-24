@@ -1,5 +1,5 @@
-import 'package:asset_tracker/core/models/haremaltin_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../data/models/socket_models/asset_model.dart';
 import '../../../core/models/websocket_state_model.dart';
 import '../../../core/services/websocket_service.dart';
 
@@ -8,7 +8,7 @@ class HomePageViewModel extends StateNotifier<WebSocketState> {
 
   HomePageViewModel(this._webSocketService)
       : super(WebSocketState(
-            isLoading: true, itemList: List<Item>.empty(), date: ""));
+            isLoading: true, itemList: List<Asset>.empty(), date: ""));
 
   Future<void> connectAndFetch() async {
     try {

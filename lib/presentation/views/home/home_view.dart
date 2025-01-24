@@ -4,6 +4,7 @@ import 'package:asset_tracker/core/constants/const_image_paths.dart';
 import 'package:asset_tracker/core/models/websocket_state_model.dart';
 import 'package:asset_tracker/core/sizes/app_edge_insets.dart';
 import 'package:asset_tracker/core/sizes/app_size.dart';
+import 'package:asset_tracker/core/utils/extensions/determine_color_extension.dart';
 import 'package:asset_tracker/core/utils/widgets/custom_sized_box.dart';
 import 'package:asset_tracker/presentation/views/home/home_view_model.dart';
 import 'package:asset_tracker/providers/providers.dart';
@@ -34,59 +35,64 @@ class _HomeViewState extends ConsumerState<HomeView> {
   Widget build(BuildContext context) {
     final viewModel = ref.watch(homePageViewModelProvider);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          ConstAppTexts.liveMarketDataText,
-          style: TextStyle(fontSize: AppSize.largeText),
+        appBar: AppBar(
+          title: const Text(
+            ConstAppTexts.liveMarketDataText,
+            style: TextStyle(fontSize: AppSize.largeText),
+          ),
+          centerTitle: true,
         ),
-        centerTitle: true,
-      ),
-      body: viewModel.isLoading
-          ? _onDataLoading()
-          : viewModel.errorMessage != null
-              ? _onError()
-              : _onDataFetched(viewModel),
-    );
+        body: buildBody(viewModel));
+  }
+
+  Widget buildBody(WebSocketState viewModel) {
+    if (viewModel.isLoading) return _onDataLoading();
+
+    if (viewModel.errorMessage != null) return _onError();
+
+    return _onSuccess(viewModel);
   }
 
   Center _onDataLoading() => const Center(child: CircularProgressIndicator());
 
-  SingleChildScrollView _onDataFetched(WebSocketState viewModel) {
-    return SingleChildScrollView(
-      padding: AppEdgeInsets.xSmall,
-      child: Column(
-        children: [
-          const CustomSizedBox.smallHeigth(),
-          Text(
-            viewModel.date,
-            style: const TextStyle(
-                color: ConstAppColors.defaultGreyColor,
-                fontStyle: FontStyle.italic),
-          ),
-          DataTable(
-            columnSpacing: AppSize.xLargeSize,
-            columns: const [
-              DataColumn(label: Text('')),
-              DataColumn(label: Text(ConstAppTexts.buyingText)),
-              DataColumn(label: Text(ConstAppTexts.sellingText)),
-            ],
-            rows: viewModel.itemList!.map((entry) {
-              return DataRow(
-                cells: [
-                  DataCell(
-                      Text(ConstAppTexts.currencies[entry.code] ?? entry.code)),
-                  DataCell(Text(
-                    entry.alis,
-                    style: TextStyle(color: determineColor(entry.dir.alisDir)),
-                  )),
-                  DataCell(Text(entry.satis,
-                      style: TextStyle(
-                          color: determineColor(entry.dir.satisDir)))),
-                ],
-              );
-            }).toList(),
-          ),
-        ],
+  Center _onSuccess(WebSocketState viewModel) {
+    return Center(
+      child: SingleChildScrollView(
+        padding: AppEdgeInsets.medium,
+        child: Column(
+          children: [
+            const CustomSizedBox.smallHeigth(),
+            Text(
+              viewModel.date,
+              style: const TextStyle(
+                  color: ConstAppColors.defaultGreyColor,
+                  fontStyle: FontStyle.italic),
+            ),
+            DataTable(
+              columnSpacing: AppSize.xLargeSize,
+              columns: const [
+                DataColumn(label: Text('')),
+                DataColumn(label: Text(ConstAppTexts.buyingText)),
+                DataColumn(label: Text(ConstAppTexts.sellingText)),
+              ],
+              rows: viewModel.itemList!.map((entry) {
+                return DataRow(
+                  cells: [
+                    DataCell(Text(
+                        ConstAppTexts.currencies[entry.code] ?? entry.code)),
+                    DataCell(Text(
+                      entry.alis.toString(),
+                      style: TextStyle(color: entry.dir?.alisDir.toColor()),
+                    )),
+                    DataCell(Text(entry.satis.toString(),
+                        style:
+                            TextStyle(color: entry.dir?.satisDir.toColor()))),
+                  ],
+                );
+              }).toList(),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -112,13 +118,5 @@ class _HomeViewState extends ConsumerState<HomeView> {
         )
       ],
     ));
-  }
-
-  Color determineColor(String direction) {
-    return direction == ConstAppTexts.dirDownText
-        ? ConstAppColors.defaultRedColor
-        : direction == ConstAppTexts.dirUpText
-            ? ConstAppColors.defaultGreenColor
-            : ConstAppColors.defaultBlackColor;
   }
 }

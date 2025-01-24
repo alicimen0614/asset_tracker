@@ -1,3 +1,4 @@
+import 'package:asset_tracker/core/constants/const_app_texts.dart';
 import 'package:asset_tracker/core/models/auth_state_model.dart';
 import 'package:asset_tracker/core/models/websocket_state_model.dart';
 import 'package:asset_tracker/core/state/auth_notifier.dart';
@@ -11,7 +12,7 @@ import '../data/services/websocket_manager.dart';
 
 final _firebaseAuthService = FirebaseAuthService(FirebaseAuth.instance);
 final webSocketServiceInstance =
-    WebSocketManager(dotenv.env['SOCKET_CONNECTION_URL']!);
+    WebSocketManager(dotenv.env[ConstAppTexts.socketUrlAccessText]!);
 
 final authNotifierProvider =
     StateNotifierProvider<AuthNotifier, AuthState>((ref) {

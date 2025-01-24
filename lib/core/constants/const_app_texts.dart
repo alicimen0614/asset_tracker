@@ -36,6 +36,7 @@ class ConstAppTexts {
   static const connectionErrorText =
       "Piyasa verileri yüklenirken bir hata oluştu. Lütfen tekrar deneyin.";
   static const tryAgainText = "Tekrar dene";
+  static const socketUrlAccessText = 'SOCKET_CONNECTION_URL';
 
   //Currency Names
 

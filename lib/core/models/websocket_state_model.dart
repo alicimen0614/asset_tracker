@@ -1,9 +1,9 @@
-import 'package:asset_tracker/core/models/haremaltin_model.dart';
+import '../../data/models/socket_models/asset_model.dart';
 
 class WebSocketState {
   final bool isLoading;
   final String? errorMessage;
-  final List<Item>? itemList;
+  final List<Asset>? itemList;
   final String date;
 
   WebSocketState(
@@ -15,7 +15,7 @@ class WebSocketState {
   WebSocketState copyWith({
     bool? isLoading,
     String? errorMessage,
-    List<Item>? itemList,
+    List<Asset>? itemList,
     String? date,
   }) {
     return WebSocketState(
