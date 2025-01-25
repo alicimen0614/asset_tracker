@@ -6,7 +6,8 @@ part of 'asset_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Asset _$AssetFromJson(Map<String, dynamic> json) => Asset(
+CurrencyModel _$CurrencyModelFromJson(Map<String, dynamic> json) =>
+    CurrencyModel(
       code: json['code']?.toString() ?? '',
       alis: json['alis']?.toString() ?? '',
       satis: json['satis']?.toString() ?? '',
@@ -19,7 +20,8 @@ Asset _$AssetFromJson(Map<String, dynamic> json) => Asset(
       kapanis: (json['kapanis'] as num?)?.toDouble(),
     );
 
-Map<String, dynamic> _$AssetToJson(Asset instance) => <String, dynamic>{
+Map<String, dynamic> _$CurrencyModelToJson(CurrencyModel instance) =>
+    <String, dynamic>{
       'code': instance.code,
       'alis': instance.alis,
       'satis': instance.satis,

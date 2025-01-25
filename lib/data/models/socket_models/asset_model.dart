@@ -4,7 +4,7 @@ import 'direction_model.dart';
 part 'asset_model.g.dart';
 
 @JsonSerializable()
-class Asset {
+class CurrencyModel {
   @JsonKey(defaultValue: '')
   final String code;
   @JsonKey(defaultValue: '')
@@ -18,7 +18,7 @@ class Asset {
   final double? yuksek;
   final double? kapanis;
 
-  Asset({
+  CurrencyModel({
     required this.code,
     required this.alis,
     required this.satis,
@@ -29,7 +29,8 @@ class Asset {
     this.kapanis,
   });
 
-  factory Asset.fromJson(Map<String, dynamic> json) => _$AssetFromJson(json);
+  factory CurrencyModel.fromJson(Map<String, dynamic> json) =>
+      _$CurrencyModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$AssetToJson(this);
+  Map<String, dynamic> toJson() => _$CurrencyModelToJson(this);
 }

@@ -12,7 +12,7 @@ class WebSocketManager implements IWebSocketService {
   WebSocket? _webSocket;
   final StreamController<Map<String, dynamic>> _controller =
       StreamController<Map<String, dynamic>>.broadcast();
-  final List<Asset> _fixedDataList = [];
+  final List<CurrencyModel> _fixedDataList = [];
   final int maxRetries = 3;
   final int delayBetweenRetries = 2;
 
@@ -69,7 +69,7 @@ class WebSocketManager implements IWebSocketService {
         .add({'date': incomingData.meta?.tarih, 'itemList': _fixedDataList});
   }
 
-  void _updateFixedDataList(List<Asset> incomingData) {
+  void _updateFixedDataList(List<CurrencyModel> incomingData) {
     for (var data in incomingData) {
       int index =
           _fixedDataList.indexWhere((element) => element.code == data.code);

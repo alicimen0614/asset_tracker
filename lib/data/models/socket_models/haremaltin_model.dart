@@ -8,7 +8,7 @@ part 'haremaltin_model.g.dart';
 class HaremAltinData {
   final Meta? meta;
   @JsonKey(defaultValue: [])
-  final List<Asset> data;
+  final List<CurrencyModel> data;
 
   HaremAltinData({this.meta, required this.data});
 

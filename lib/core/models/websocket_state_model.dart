@@ -3,7 +3,7 @@ import '../../data/models/socket_models/asset_model.dart';
 class WebSocketState {
   final bool isLoading;
   final String? errorMessage;
-  final List<Asset>? itemList;
+  final List<CurrencyModel>? itemList;
   final String date;
 
   WebSocketState(
@@ -15,7 +15,7 @@ class WebSocketState {
   WebSocketState copyWith({
     bool? isLoading,
     String? errorMessage,
-    List<Asset>? itemList,
+    List<CurrencyModel>? itemList,
     String? date,
   }) {
     return WebSocketState(

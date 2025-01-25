@@ -8,7 +8,7 @@ class HomePageViewModel extends StateNotifier<WebSocketState> {
 
   HomePageViewModel(this._webSocketService)
       : super(WebSocketState(
-            isLoading: true, itemList: List<Asset>.empty(), date: ""));
+            isLoading: true, itemList: List<CurrencyModel>.empty(), date: ""));
 
   Future<void> connectAndFetch() async {
     try {

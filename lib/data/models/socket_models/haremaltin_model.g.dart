@@ -15,7 +15,7 @@ HaremAltinData _$HaremAltinDataFromJson(Map<String, dynamic> json) =>
               ?.values
               .toList()
               .map(
-                (e) => Asset.fromJson(e),
+                (e) => CurrencyModel.fromJson(e),
               )
               .toList() ??
           [],
