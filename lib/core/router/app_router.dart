@@ -5,11 +5,19 @@ import 'app_router.gr.dart';
 class AppRouter extends RootStackRouter {
   @override
   List<AutoRoute> get routes => [
+        AutoRoute(page: MainRoute.page),
         AutoRoute(page: SplashRoute.page, initial: true),
         AutoRoute(
           page: LoginRoute.page,
         ),
-        AutoRoute(page: HomeRoute.page)
+        AutoRoute(
+          path: '/main',
+          page: MainRoute.page,
+          children: [
+            AutoRoute(page: HomeRoute.page, path: 'home'),
+            AutoRoute(page: UserRoute.page, path: 'user'),
+          ],
+        ),
       ];
 }
 
