@@ -130,6 +130,6 @@ class _LoginViewState extends ConsumerState<LoginView>
 
   void _handleSuccess() {
     SnackbarHelper.showSnackbar(context, ConstAppTexts.signInSuccessText);
-    router.replace(const HomeRoute());
+    router.replace(const MainRoute());
   }
 }
