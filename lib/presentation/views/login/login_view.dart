@@ -8,8 +8,8 @@ import 'package:asset_tracker/core/utils/helpers/snackbar_helper.dart';
 import 'package:asset_tracker/core/utils/validators/login_validator.dart';
 import 'package:asset_tracker/core/utils/widgets/app_logo_widget.dart';
 import 'package:asset_tracker/core/utils/widgets/custom_elevated_button.dart';
+import 'package:asset_tracker/core/utils/widgets/custom_form_field.dart';
 import 'package:asset_tracker/core/utils/widgets/custom_sized_box.dart';
-import 'package:asset_tracker/presentation/views/login/widgets/auth_form_field.dart';
 import 'package:asset_tracker/providers/providers.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +50,7 @@ class _LoginViewState extends ConsumerState<LoginView>
           centerTitle: true,
         ),
         body: Padding(
-          padding: AppEdgeInsets.medium,
+          padding: AppEdgeInsets.mediumHorizontal,
           child: Form(
               key: _formKey,
               child: ListView(
@@ -58,7 +58,7 @@ class _LoginViewState extends ConsumerState<LoginView>
                   const CustomSizedBox.x3largeHeigth(),
                   AppLogoWidget.big(),
                   const CustomSizedBox.x2largeHeigth(),
-                  AuthFormField(
+                  CustomFormField.auth(
                     textInputType: TextInputType.emailAddress,
                     label: ConstAppTexts.emailText,
                     hint: ConstAppTexts.enterEmailText,
@@ -68,7 +68,7 @@ class _LoginViewState extends ConsumerState<LoginView>
                     isActive: !authState.isLoading,
                   ),
                   const CustomSizedBox.xlargeHeigth(),
-                  AuthFormField(
+                  CustomFormField.auth(
                     textEditingController: _passwordController,
                     textInputType: TextInputType.visiblePassword,
                     validator: (value) =>

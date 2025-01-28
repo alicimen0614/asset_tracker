@@ -10,10 +10,11 @@ class AppTheme {
           foregroundColor: Colors.white),
     ),
     useMaterial3: true,
-    colorScheme: ColorScheme.fromSeed(seedColor: Colors.tealAccent),
-    appBarTheme: const AppBarTheme(
-      backgroundColor: ConstAppColors.yellowAppBarColor,
+    navigationBarTheme: const NavigationBarThemeData(
+      backgroundColor: Colors.white,
+      indicatorColor: Color(0xFF85BB65),
     ),
+    colorScheme: ColorScheme.fromSeed(seedColor: Colors.tealAccent),
     inputDecorationTheme: const InputDecorationTheme(
       hintStyle: TextStyle(
         color: Colors.grey,

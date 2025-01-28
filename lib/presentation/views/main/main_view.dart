@@ -1,3 +1,4 @@
+import 'package:asset_tracker/core/constants/const_app_colors.dart';
 import 'package:asset_tracker/core/constants/const_app_texts.dart';
 import 'package:asset_tracker/core/router/app_router.gr.dart';
 import 'package:auto_route/auto_route.dart';
@@ -17,21 +18,30 @@ class _MainViewState extends State<MainView> {
     const UserRoute(),
   ];
 
-  final List<BottomNavigationBarItem> _bottomNavigationBarItems = [
-    const BottomNavigationBarItem(
-        icon: Icon(Icons.home), label: ConstAppTexts.homeText),
-    const BottomNavigationBarItem(
-        icon: Icon(Icons.search), label: ConstAppTexts.userText),
+  final List<NavigationDestination> _bottomNavigationBarItems = [
+    const NavigationDestination(
+      icon: Icon(
+        Icons.home,
+        color: ConstAppColors.defaultDarkGreyColor,
+      ),
+      label: ConstAppTexts.homeText,
+    ),
+    const NavigationDestination(
+        icon: Icon(
+          Icons.person,
+          color: ConstAppColors.defaultDarkGreyColor,
+        ),
+        label: ConstAppTexts.userText),
   ];
   @override
   Widget build(BuildContext context) {
     return AutoTabsScaffold(
-      routes: _routes,
-      bottomNavigationBuilder: (context, tabsRouter) => BottomNavigationBar(
-          currentIndex: tabsRouter.activeIndex,
-          items: _bottomNavigationBarItems,
-          onTap: (value) => _onTap(value, tabsRouter)),
-    );
+        routes: _routes,
+        bottomNavigationBuilder: (context, tabsRouter) => NavigationBar(
+              destinations: _bottomNavigationBarItems,
+              selectedIndex: tabsRouter.activeIndex,
+              onDestinationSelected: (value) => _onTap(value, tabsRouter),
+            ));
   }
 
   void _onTap(int selectedIndex, TabsRouter tabsRouter) {

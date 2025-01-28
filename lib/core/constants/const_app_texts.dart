@@ -39,6 +39,8 @@ class ConstAppTexts {
   static const socketUrlAccessText = 'SOCKET_CONNECTION_URL';
   static const homeText = 'Anasayfa';
   static const userText = 'Kullanıcı';
+  static const searchHintText = 'Ara';
+  static const assetTrackerText = 'Asset Tracker';
 
   //Currency Names
 
