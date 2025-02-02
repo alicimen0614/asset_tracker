@@ -22,14 +22,15 @@ class HomePageViewModel extends StateNotifier<WebSocketState> {
             isLoading: false,
             date: event['date'],
           );
-          //to get the filtered assets we first provide the refreshed list of assets if it is not null we use old state's asset list
-          getFilteredAssets(event['itemList'] ?? state.itemList ?? []);
+          //to get the filtered assets we first provide the refreshed list of assets if it is not null we use fixed state's asset list
+          getFilteredAssets(event['itemList'] ?? state.fixedItemList ?? []);
           return;
         } else {
           state = state.copyWith(
             isLoading: false,
             itemList: event['itemList'],
             date: event['date'],
+            fixedItemList: event['itemList'],
           );
         }
       }, onError: (error) {
@@ -59,8 +60,11 @@ class HomePageViewModel extends StateNotifier<WebSocketState> {
         .toList();
 
     state = state.copyWith(
-      isLoading: false,
-      itemList: filteredItemList.isEmpty ? state.itemList : filteredItemList,
-    );
+        isLoading: false,
+        itemList: searchBarController.text.isNotEmpty
+            ? filteredItemList.isEmpty
+                ? state.itemList
+                : filteredItemList
+            : state.fixedItemList);
   }
 }
