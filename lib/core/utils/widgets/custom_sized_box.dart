@@ -71,17 +71,17 @@ class CustomSizedBox extends SizedBox {
 
   ///40.0
   const CustomSizedBox.x2largeWidth({super.key})
-      : super(height: AppSize.x2LargeSize);
+      : super(width: AppSize.x2LargeSize);
 
   ///60.0
   const CustomSizedBox.x3largeWidth({super.key})
-      : super(height: AppSize.x3LargeSize);
+      : super(width: AppSize.x3LargeSize);
 
   ///80.0
   const CustomSizedBox.x4largeWidth({super.key})
-      : super(height: AppSize.x4LargeSize);
+      : super(width: AppSize.x4LargeSize);
 
   ///100.0
   const CustomSizedBox.hugeWidth({super.key})
-      : super(height: AppSize.x5LargeSize);
+      : super(width: AppSize.x5LargeSize);
 }
