@@ -41,6 +41,8 @@ class ConstAppTexts {
   static const userText = 'Kullanıcı';
   static const searchHintText = 'Ara';
   static const assetTrackerText = 'Asset Tracker';
+  static const mockUserEmailAccessText = 'MOCK_USER_EMAIL';
+  static const mockUserPasswordAccessText = 'MOCK_USER_PASSWORD';
 
   //Currency Names
 
