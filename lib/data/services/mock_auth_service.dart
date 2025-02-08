@@ -13,17 +13,6 @@ class MockAuthService implements AuthService {
     required String password,
   }) async {
     try {
-      return mockSignInWithEmailAndPassword(email: email, password: password);
-    } on AuthError catch (_) {
-      rethrow;
-    } catch (_) {
-      throw AuthError.unknown;
-    }
-  }
-
-  Future<AuthUser> mockSignInWithEmailAndPassword(
-      {required String email, required String password}) async {
-    try {
       final mockUserEmail = dotenv.env[ConstAppTexts.mockUserEmailAccessText];
       final mockUserPassword =
           dotenv.env[ConstAppTexts.mockUserPasswordAccessText];
@@ -34,8 +23,10 @@ class MockAuthService implements AuthService {
       } else {
         throw AuthError.invalidCredential;
       }
-    } catch (e) {
+    } on AuthError catch (_) {
       rethrow;
+    } catch (_) {
+      throw AuthError.unknown;
     }
   }
 }
