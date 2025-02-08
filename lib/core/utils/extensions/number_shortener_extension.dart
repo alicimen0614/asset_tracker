@@ -1,5 +1,8 @@
 extension DetermineColorExtension on String {
   String toShortVersion() {
-    return double.tryParse(this)?.toStringAsFixed(2) ?? this;
+    String result;
+    result = double.tryParse(this)?.toStringAsFixed(2) ?? this;
+    result = "₺ $result";
+    return result;
   }
 }
